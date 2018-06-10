@@ -1,9 +1,14 @@
 <template>
+
   <div id="app">
 
-    <movie />
+      <movie />
+
   </div>
+
 </template>
+
+
 
 <script>
 import movie from './components/movie.vue'

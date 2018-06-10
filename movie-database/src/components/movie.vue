@@ -1,20 +1,29 @@
-<template>
+ <template>
   <div>
-    <h1>Search here </h1>
+    <h1> Search here </h1>
     <div class="search">
+
+
       <input type="text" placeholder="Search here" v-model="item" @keyup="search">
+      
       <select name="" v-model="searchType" @click="search" id="select" > 
         <option value="movie">Movies</option>
         <option value="series">TV Series</option>
       </select>
+
+
     </div>
 
     <div class="container">
+
       <div v-for="movie in info" :key="movie.imdbID" v-if="selectedType" class="single-template">
+
         <img :src="movie.Poster" alt="">
         <h1>{{movie.Title}}</h1>
         <p>{{movie.Year}}</p>
+
       </div>
+
     </div>
 
 
@@ -23,44 +32,44 @@
 
 <script>
 
+
+
 export default {
   
   name: 'movie',
 
   data(){
     return{
-      info:[],
-      item:"",
-      searchType:''
+        info:[],
+        item:"",
+        searchType:''
     }
   },
 
+
 methods:{
   search() {
-      this.axios
-      .get('http://www.omdbapi.com/?s='+encodeURIComponent(this.item)+'&apikey=e8ed16e8' + '&type=' + this.searchType)
-      .then(response =>(this.info = response.data.Search))
+       this.axios
+        .get('http://www.omdbapi.com/?s='+encodeURIComponent(this.item)+'&apikey=e8ed16e8' + '&type=' + this.searchType)
+        .then(response =>(this.info = response.data.Search))
   },
-
-
 },
+
 computed:{
-      selectedType(){
-    if(this.searchType == ""){
-      return this.movie.Type == this.searchType;
-    } else{
-      return true;
+    selectedType(){
+      if(this.searchType == ""){
+        return this.movie.Type == this.searchType;
+     } else{
+        return true;
+      }
     }
   }
 }
 
 
 
-
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .search {
 
